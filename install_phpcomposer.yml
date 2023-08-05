@@ -1,0 +1,12 @@
+- hosts: localhost
+  connection: local
+  become: yes
+  tasks:
+    - name: Install unzip
+      apt: name=unzip
+    - name: Download composer
+      shell: curl -sS https://getcomposer.org/installer -o /tmp/composer-setup.php
+    - name: Verify installer
+      shell: php -r "if (hash_file('SHA384', '/tmp/composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+    - name: Install composer globally
+      shell: sudo php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
