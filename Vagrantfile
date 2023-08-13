@@ -65,6 +65,10 @@ Vagrant.configure("2") do |config|
     # Customize the amount of memory on the VM:
     vb.memory = "1024"
   end
+
+  # set timeout for 4 minutes
+  config.vm.boot_timeout = 240
+
   #
   # View the documentation for the provider you are using for more
   # information on available options.
